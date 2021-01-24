@@ -16,7 +16,9 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ runner.os }}-${{ github.job }}
-          path: /example/**/*apngc*.*
+          path: |
+            target/**/*apngc*.*
+            example/**/*apngc*.*
 
   build-example-release:
     strategy:
@@ -25,7 +27,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - run: cd ./example
+      - run: cd example
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -34,7 +36,9 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ runner.os }}-${{ github.job }}
-          path: /example/**/*apngc*.*
+          path:
+            target/**/*apngc*.*
+            example/**/*apngc*.*
 
   test:
     runs-on: ubuntu-latest
