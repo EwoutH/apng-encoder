@@ -9,6 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cargo build --release
+      - run: tree
       - uses: actions/upload-artifact@v2
         with:
           path: build/release/
