@@ -16,7 +16,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ runner.os }}-${{ github.job }}
-          path: /**/*apngc*.*
+          path: /example/**/*apngc*.*
 
   build-example-release:
     strategy:
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ runner.os }}-${{ github.job }}
-          path: /**/*apngc*.*
+          path: /example/**/*apngc*.*
 
   test:
     runs-on: ubuntu-latest
