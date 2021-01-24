@@ -1,7 +1,7 @@
 on: [push, pull_request]
 
 jobs:
-  build-lib:
+  build-test-lib:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -12,11 +12,7 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - run: cargo build --release
-      - uses: actions/upload-artifact@v2
-        with:
-          name: lib-${{ runner.os }}
-          path: target/release/*apng*.*
+      - run: cargo test --release --verbose --all
 
   build-apng:
     strategy:
@@ -35,13 +31,3 @@ jobs:
         with:
           name: apngc-${{ runner.os }}
           path: example/target/release/*apng*.*
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - run: cargo test --verbose --all
