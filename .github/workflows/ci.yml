@@ -15,7 +15,7 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
-          name: lib-${{ runner.os }}-${{ github.job }}
+          name: lib-${{ runner.os }}
           path: target/release/*apng*.*
 
   build-apng:
@@ -33,8 +33,8 @@ jobs:
         working-directory: ./example
       - uses: actions/upload-artifact@v2
         with:
-          name: apng-${{ runner.os }}-${{ github.job }}
-          path: example/**/*apngc*.*
+          name: apngc-${{ runner.os }}
+          path: example/target/release/*apng*.*
 
   test:
     runs-on: ubuntu-latest
