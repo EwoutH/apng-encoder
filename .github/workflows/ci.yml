@@ -1,7 +1,7 @@
 on: [push, pull_request]
 
 jobs:
-  build-release:
+  build-lib:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -15,12 +15,10 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ runner.os }}-${{ github.job }}
-          path: |
-            target/**/*apngc*.*
-            example/**/*apngc*.*
+          name: lib-${{ runner.os }}-${{ github.job }}
+          path: target/release/*apng*.*
 
-  build-example-release:
+  build-apng:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -35,10 +33,8 @@ jobs:
         working-directory: ./example
       - uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ runner.os }}-${{ github.job }}
-          path:
-            target/**/*apngc*.*
-            example/**/*apngc*.*
+          name: apng-${{ runner.os }}-${{ github.job }}
+          path: example/**/*apngc*.*
 
   test:
     runs-on: ubuntu-latest
