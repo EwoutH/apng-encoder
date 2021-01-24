@@ -15,7 +15,7 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ runner.os }}-${{ job }}
+          name: artifact-${{ runner.os }}-${{ github.job }}
           path: target/release/*apng*.*
 
   build-example-release:
@@ -33,7 +33,7 @@ jobs:
       - run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
-          name: artifact-${{ runner.os }}-${{ job }}
+          name: artifact-${{ runner.os }}-${{ github.job }}
           path: target/release/*apng*.*
 
   test:
