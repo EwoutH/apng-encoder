@@ -16,3 +16,30 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           path: target/release/*apng*.*
+
+  build-example-release:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd example
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - run: cargo build --release
+      - uses: actions/upload-artifact@v2
+        with:
+          path: target/release/*apng*.*
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - run: cargo test --verbose --all
