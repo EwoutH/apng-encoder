@@ -27,11 +27,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - run: cd example
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
+      - run: cd example
       - run: cargo build --release
       - uses: actions/upload-artifact@v2
         with:
