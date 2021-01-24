@@ -31,8 +31,8 @@ jobs:
         with:
           toolchain: stable
           override: true
-      - run: cd example
       - run: cargo build --release
+        working-directory: ./example
       - uses: actions/upload-artifact@v2
         with:
           name: artifact-${{ runner.os }}-${{ github.job }}
